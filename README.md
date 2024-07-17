@@ -1,3 +1,24 @@
+## This Fork:
+This fork modifies the project structure to make it pip installable.
+You can install the package by running:
+```bash
+pip install git+https://github.com/naba89/DDDM-VC.git
+```
+This fork also adds an inference model class, that can be used as follows:
+```python
+import torch
+from dddm_vc.inference_api import DDDMVCInferenceModel
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model = DDDMVCInferenceModel(
+                 hf_repo="subatomicseer/dddm_vc_checkpoints",
+                 time_step=30,
+).to(device)
+model.vc_to_file(audio='source.wav', save_path='output.wav', speaker_prompt='target.wav')
+```
+Also hosted the checkpoints on huggingface model hub, for simpler and automated download.
+
+## Original README.md follows:
+
 ## DDDM-VC: Decoupled Denoising Diffusion Models with Disentangled Representation and Prior Mixup for Verified Robust Voice Conversion
 
 The official Pytorch implementation of DDDM-VC (AAAI 2024)
@@ -112,13 +133,3 @@ This work is licensed under a
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
-
-
-
-
-
-
-
-
-
-
