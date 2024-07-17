@@ -1,22 +1,18 @@
 import os
 import torch
 import argparse
-import json
-from glob import glob
-import tqdm
 import numpy as np
 from torch.nn import functional as F
-import commons
 from scipy.io.wavfile import write
 import torchaudio
 import utils
-from data_loader import MelSpectrogramFixed
+from dddm_vc.data_loader import MelSpectrogramFixed
 
 import amfm_decompy.basic_tools as basic
 import amfm_decompy.pYAAPT as pYAAPT
-from model.vc_dddm_mixup import SynthesizerTrn, Wav2vec2, DDDM
-from vocoder.hifigan import HiFi
-from model_f0_vqvae import Quantizer
+from dddm_vc.model.vc_dddm_mixup import Wav2vec2, DDDM
+from dddm_vc.vocoder.hifigan import HiFi
+from dddm_vc.model_f0_vqvae import Quantizer
 
 h = None
 device = None

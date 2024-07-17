@@ -5,7 +5,7 @@ import torch as t
 import torch.nn as nn
 import torch.nn.functional as F
 
-import modules_vqvae.dist as dist
+import dddm_vc.modules_vqvae.dist as dist
 
 
 class BottleneckBlock(nn.Module):
@@ -21,7 +21,7 @@ class BottleneckBlock(nn.Module):
         self.init = False
         self.k_sum = None
         self.k_elem = None
-        self.register_buffer('k', t.zeros(self.k_bins, self.emb_width).cuda())
+        self.register_buffer('k', t.zeros(self.k_bins, self.emb_width))
 
     def _tile(self, x):
         d, ew = x.shape

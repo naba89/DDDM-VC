@@ -1,10 +1,10 @@
 import math
-import torch 
-import numpy as np
-from torch.nn import functional as F
 
-from model.base import BaseModule
-from model.diffusion_module import *
+import torch
+
+from dddm_vc.model.base import BaseModule
+from dddm_vc.model.diffusion_module import SinusoidalPosEmb, ResnetBlock, Residual, Rezero, LinearAttention, Downsample, \
+    Upsample, Block, Mish
 
 
 class GradLogPEstimator(BaseModule):

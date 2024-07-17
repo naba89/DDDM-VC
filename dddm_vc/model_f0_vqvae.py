@@ -1,7 +1,7 @@
 import torch.nn as nn
 import torch
-from modules_vqvae.jukebox import Encoder, Decoder
-from modules_vqvae.vq import Bottleneck
+from dddm_vc.modules_vqvae.jukebox import Encoder, Decoder
+from dddm_vc.modules_vqvae.vq import Bottleneck
 
 LRELU_SLOPE = 0.1
 

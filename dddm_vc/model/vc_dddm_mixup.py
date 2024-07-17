@@ -1,21 +1,15 @@
 import torch
+import transformers
 from torch import nn
 from torch.nn import functional as F
-from torch.nn import Conv1d, ConvTranspose1d, AvgPool1d, Conv2d
-from torch.nn.utils import weight_norm, remove_weight_norm, spectral_norm
-from torch.cuda.amp import autocast
 
-import typing as tp
-from model.base import BaseModule
-from model.diffusion import Diffusion
-from model.styleencoder import StyleEncoder
-from model.utils import sequence_mask, fix_len_compatibility
-
-import utils
-import transformers 
 import commons
-from modules_sf.modules import *
-from commons import init_weights, get_padding  
+from dddm_vc.model.base import BaseModule
+from dddm_vc.model.diffusion import Diffusion
+from dddm_vc.model.styleencoder import StyleEncoder
+from dddm_vc.model.utils import sequence_mask, fix_len_compatibility
+from dddm_vc.modules_sf.modules import WN
+
 
 class Wav2vec2(torch.nn.Module):
     def __init__(self, layer=12): 
@@ -241,4 +235,3 @@ class DDDM(BaseModule):
         mel_loss = F.l1_loss(x, enc_out)
 
         return diff_loss, mel_loss
-

@@ -5,9 +5,8 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 
 import torch.distributed as dist
 import torch.multiprocessing as mp
-from torch.cuda.amp import autocast, GradScaler
+from torch.cuda.amp import GradScaler
 
-from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data.distributed import DistributedSampler
 
@@ -15,10 +14,10 @@ import random
 import commons
 import utils
 
-from augmentation.aug import Augment
-from model_f0_vqvae import Quantizer
-from model.vc_dddm_mixup import Wav2vec2, DDDM
-from data_loader import AudioDataset, MelSpectrogramFixed
+from dddm_vc.augmentation.aug import Augment
+from dddm_vc.model_f0_vqvae import Quantizer
+from dddm_vc.model.vc_dddm_mixup import Wav2vec2, DDDM
+from dddm_vc.data_loader import AudioDataset, MelSpectrogramFixed
 from hifigan.vocoder import HiFi
 from torch.utils.data import DataLoader
 

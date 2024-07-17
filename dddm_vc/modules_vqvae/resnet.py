@@ -3,7 +3,7 @@
 import math
 import torch.nn as nn
 
-import modules_vqvae.dist as dist
+import dddm_vc.modules_vqvae.dist as dist
 
 
 class ResConvBlock(nn.Module):

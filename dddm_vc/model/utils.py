@@ -1,7 +1,6 @@
 
 
 import os
-import glob
 import sys
 import logging
 import torch
@@ -9,7 +8,7 @@ import torchaudio
 import numpy as np
 
 from librosa.filters import mel as librosa_mel_fn
-from model.base import BaseModule
+from dddm_vc.model.base import BaseModule
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging

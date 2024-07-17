@@ -1,13 +1,17 @@
-from modules_sf.attentions import *
 from torch import nn
 import torch
 from torch.nn import functional as F
 
+from dddm_vc.modules_sf.attentions import MultiHeadAttention
+
+
 class Mish(nn.Module):
     def __init__(self):
         super(Mish, self).__init__()
+
     def forward(self, x):
         return x * torch.tanh(F.softplus(x))
+
 
 class Conv1dGLU(nn.Module):
     '''
@@ -27,15 +31,16 @@ class Conv1dGLU(nn.Module):
         x1, x2 = torch.split(x, split_size_or_sections=self.out_channels, dim=1)
         x = x1 * torch.sigmoid(x2)
         x = residual + self.dropout(x)
-        
+
         return x
+
 
 class StyleEncoder(torch.nn.Module):
     def __init__(self, in_dim=513, hidden_dim=128, out_dim=256):
 
         super().__init__()
 
-        self.in_dim = in_dim 
+        self.in_dim = in_dim
         self.hidden_dim = hidden_dim
         self.out_dim = out_dim
         self.kernel_size = 5
@@ -56,17 +61,18 @@ class StyleEncoder(torch.nn.Module):
             Conv1dGLU(self.hidden_dim, self.hidden_dim, self.kernel_size, self.dropout),
         )
 
-        self.slf_attn = MultiHeadAttention(self.hidden_dim, self.hidden_dim, self.n_head, p_dropout = self.dropout, proximal_bias= False, proximal_init=True)
+        self.slf_attn = MultiHeadAttention(self.hidden_dim, self.hidden_dim, self.n_head, p_dropout=self.dropout,
+                                           proximal_bias=False, proximal_init=True)
         self.atten_drop = nn.Dropout(self.dropout)
         self.fc = nn.Conv1d(self.hidden_dim, self.out_dim, 1)
 
     def forward(self, x, mask=None):
-        x = self.spectral(x)*mask
-        x = self.temporal(x)*mask
+        x = self.spectral(x) * mask
+        x = self.temporal(x) * mask
 
         attn_mask = mask.unsqueeze(2) * mask.unsqueeze(-1)
-        y = self.slf_attn(x,x, attn_mask=attn_mask)
-        x = x+ self.atten_drop(y)
+        y = self.slf_attn(x, x, attn_mask=attn_mask)
+        x = x + self.atten_drop(y)
 
         x = self.fc(x)
 
@@ -81,5 +87,5 @@ class StyleEncoder(torch.nn.Module):
             len_ = mask.sum(dim=2)
             x = x.sum(dim=2)
             out = torch.div(x, len_)
-            
+
         return out

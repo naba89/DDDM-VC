@@ -1,11 +1,9 @@
-import copy
 import math
-import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
 import commons
-from modules_sf.modules import LayerNorm
+from dddm_vc.modules_sf.modules import LayerNorm
 
 class Encoder(nn.Module):
     def __init__(self, hidden_channels, filter_channels, n_heads, n_layers, kernel_size=1, p_dropout=0., window_size=4,

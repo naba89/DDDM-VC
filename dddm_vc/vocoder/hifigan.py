@@ -1,15 +1,16 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-from modules_sf.modules import *
 
-from torch.nn import Conv1d, ConvTranspose1d, AvgPool1d, Conv2d
+from torch.nn import Conv1d, ConvTranspose1d, Conv2d
 from torch.nn.utils import weight_norm, remove_weight_norm, spectral_norm
 from commons import init_weights, get_padding
-from torch.cuda.amp import autocast
 import torchaudio
 from einops import rearrange
 import typing as tp
+
+from dddm_vc.modules_sf.modules import ResBlock1, ResBlock2, LRELU_SLOPE
+
 
 def get_2d_padding(kernel_size: tp.Tuple[int, int], dilation: tp.Tuple[int, int] = (1, 1)):
     return (((kernel_size[0] - 1) * dilation[0]) // 2, ((kernel_size[1] - 1) * dilation[1]) // 2)
@@ -247,4 +248,3 @@ class HiFi(nn.Module):
 
     o = self.dec(x[:,:,:max_len])
     return o
-

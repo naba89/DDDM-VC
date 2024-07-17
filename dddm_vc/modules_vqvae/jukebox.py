@@ -2,7 +2,7 @@
 
 import numpy as np
 import torch.nn as nn
-from modules_vqvae.resnet import Resnet1D
+from dddm_vc.modules_vqvae.resnet import Resnet1D
 
 
 def assert_shape(x, exp_shape):
