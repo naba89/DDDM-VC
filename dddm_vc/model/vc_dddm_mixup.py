@@ -3,7 +3,7 @@ import transformers
 from torch import nn
 from torch.nn import functional as F
 
-import commons
+from dddm_vc.model import commons
 from dddm_vc.model.base import BaseModule
 from dddm_vc.model.diffusion import Diffusion
 from dddm_vc.model.styleencoder import StyleEncoder
