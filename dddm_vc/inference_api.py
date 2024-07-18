@@ -11,7 +11,7 @@ from scipy.io.wavfile import write
 import torchaudio
 from transformers.modeling_utils import ModuleUtilsMixin
 
-import utils
+from dddm_vc import utils
 from dddm_vc.data_loader import MelSpectrogramFixed
 
 import amfm_decompy.basic_tools as basic

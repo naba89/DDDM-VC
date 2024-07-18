@@ -5,7 +5,7 @@ import numpy as np
 from torch.nn import functional as F
 from scipy.io.wavfile import write
 import torchaudio
-import utils
+from dddm_vc import utils
 from dddm_vc.data_loader import MelSpectrogramFixed
 
 import amfm_decompy.basic_tools as basic

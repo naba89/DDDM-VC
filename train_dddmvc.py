@@ -12,7 +12,7 @@ from torch.utils.data.distributed import DistributedSampler
 
 import random
 import commons
-import utils
+from dddm_vc import utils
 
 from dddm_vc.augmentation.aug import Augment
 from dddm_vc.model_f0_vqvae import Quantizer
