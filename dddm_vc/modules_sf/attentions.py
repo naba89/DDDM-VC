@@ -2,7 +2,7 @@ import math
 import torch
 from torch import nn
 from torch.nn import functional as F
-import commons
+from dddm_vc.model import commons
 from dddm_vc.modules_sf.modules import LayerNorm
 
 class Encoder(nn.Module):
