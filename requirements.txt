@@ -1,0 +1,7 @@
+einops
+huggingface-hub
+librosa
+omegaconf
+SoundFile
+torch
+torchaudio
