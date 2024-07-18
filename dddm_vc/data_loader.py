@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torchaudio
 from torchaudio.transforms import MelSpectrogram
-from utils import parse_filelist
+from dddm_vc.utils import parse_filelist
 
 np.random.seed(1234)
 class AudioDataset(torch.utils.data.Dataset):
